@@ -1,0 +1,115 @@
+/*
+ * config-contact.css
+ * Позиционирование и стили ТОЛЬКО для страницы контактов (page-5)
+ * Всё через переменные + комментарии. Никаких inline в HTML.
+ */
+
+/* ====================== DESKTOP (ПК) ====================== */
+:root {
+    --width-contact-container:  480px;
+    --padding-contact-container: 40px;
+    --fs-contact-title:         32px;
+    --margin-bottom-title:      32px;
+    --gap-contact-form:         16px;
+    --padding-form-input:       16px 20px;
+    --fs-form-input:            16px;
+    --padding-btn-submit:       16px;
+    --fs-btn-submit:            14px;
+    --margin-top-btn-submit:    12px;
+}
+
+/* ====================== MOBILE ====================== */
+@media (max-width: 768px) {
+    :root {
+        --width-contact-container:   92vw;
+        --padding-contact-container: 32px 24px;
+        --fs-contact-title:          26px;
+        --margin-bottom-title:       24px;
+        --fs-form-input:             15px;
+    }
+}
+
+@media (max-height: 680px) {
+    :root {
+        --padding-contact-container: 24px 20px;
+    }
+}
+
+/* ====================== СТИЛИ ====================== */
+.contact-center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 80px 20px 40px;
+}
+
+.contact-container {
+    width: var(--width-contact-container);
+    max-width: 90vw;
+    padding: var(--padding-contact-container);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid #00f2fe;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0,242,254,0.25);
+}
+
+.contact-title {
+    font-family: var(--font-bold);
+    font-size: var(--fs-contact-title);
+    text-align: center;
+    margin-bottom: var(--margin-bottom-title);
+    color: #00f2fe;
+    letter-spacing: 1px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-contact-form);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: var(--padding-form-input);
+    color: white;
+    font-size: var(--fs-form-input);
+    font-family: var(--font-light);
+    transition: all 0.3s ease;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #00f2fe;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 3px rgba(0,242,254,0.2);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: var(--padding-btn-submit);
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-bold);
+    font-size: var(--fs-btn-submit);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: var(--margin-top-btn-submit);
+    transition: all 0.35s ease;
+}
+
+.btn-submit:hover {
+    background: #00f2fe;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(0,242,254,0.6);
+}

@@ -1,0 +1,182 @@
+/*
+ * config-projects.css — aetera™
+ * Страница проектов (page-2)
+ *
+ * ПРИНЦИП СТРЕЛКИ:
+ * border-radius: 999px на карточке означает, что правый край —
+ * это полукруг радиусом = --card-height / 2.
+ * Чтобы стрелка встала точно в центр этого круга:
+ *   — padding-right карточки = 0
+ *   — ширина и высота .ae-arrow-fwd = var(--card-height)
+ * Тогда при любом изменении --card-height стрелка автоматически
+ * остаётся в центре скругления. calc() не нужен — переменная
+ * используется напрямую как для высоты карточки, так и для размера стрелки.
+ *
+ * Размер SVG-иконки внутри = calc(var(--card-height) * var(--arrow-icon-ratio))
+ * Меняйте --arrow-icon-ratio чтобы масштабировать иконку пропорционально карточке.
+ * 0.375 = ~37.5% высоты карточки (≈30px при 80px) — пропорционально радиусу скругления.
+ */
+
+#page-2 {
+    --y-proj-1:          20%;
+    --y-proj-2:          42%;
+    --y-proj-3:          64%;
+    --card-width:        520px;
+    --card-height:       80px;       /* ← единственный источник истины для стрелки */
+    --card-pad-left:     32px;       /* отступ текста слева */
+    --fs-title:          21px;
+    --fs-desc:           13px;
+    --arrow-icon-ratio:  0.375;      /* иконка = 37.5% от высоты карточки ≈ 30px при 80px */
+}
+
+@media (max-width: 768px) {
+    #page-2 {
+        --y-proj-1:      16%;
+        --y-proj-2:      38%;
+        --y-proj-3:      60%;
+        --card-width:    88vw;
+        --card-height:   76px;
+        --card-pad-left: 26px;
+        --fs-title:      19px;
+        --fs-desc:       12px;
+    }
+}
+
+#page-2 .scroll-content {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ── Карточки ── */
+#page-2 .project-card {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-right: 0 — стрелка-квадрат прижата к правому краю */
+    padding: 0 0 0 var(--card-pad-left);
+    z-index: 10;
+    overflow: visible;
+    opacity: 0;
+    translate: 0 18px;
+    animation: cardReveal 0.55s var(--ease-spring) forwards;
+}
+
+#page-2 .project-card-1 { top: var(--y-proj-1); animation-delay: 0.05s; }
+#page-2 .project-card-2 { top: var(--y-proj-2); animation-delay: 0.18s; }
+#page-2 .project-card-3 { top: var(--y-proj-3); animation-delay: 0.31s; }
+
+#page-2 .project-card:hover {
+    transform: translateX(-50%) translateY(var(--lift));
+}
+#page-2 .project-card:active {
+    transform: translateX(-50%) translateY(0px) scale(0.984);
+}
+
+@keyframes cardReveal {
+    to { opacity: 1; translate: 0 0; }
+}
+
+/*
+ * ── Стрелка ──
+ * width = height = --card-height  →  квадрат, центр = центр правого скругления.
+ * SVG внутри масштабируется через --arrow-icon-ratio.
+ * При изменении --card-height менять больше ничего не нужно.
+ */
+#page-2 .project-card .ae-arrow-fwd {
+    width:  var(--card-height);
+    height: var(--card-height);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-arrow);
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+#page-2 .project-card .ae-arrow-fwd svg {
+    /* calc: иконка пропорциональна высоте карточки */
+    width:  calc(var(--card-height) * var(--arrow-icon-ratio));
+    height: calc(var(--card-height) * var(--arrow-icon-ratio));
+    display: block;
+}
+
+#page-2 .project-card:hover .ae-arrow-fwd {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+#page-2 .project-card:active .ae-arrow-fwd {
+    transform: translateX(2px);
+}
+
+/* ── Текст ── */
+#page-2 .project-info { text-align: left; }
+
+#page-2 .project-info h3 {
+    font-family: var(--font-bold);
+    font-size: var(--fs-title);
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: 0.01em;
+    transition: color var(--dur-med) var(--ease-out);
+}
+#page-2 .project-card:hover .project-info h3 { color: var(--accent); }
+
+#page-2 .project-info p {
+    font-family: var(--font-light);
+    font-size: var(--fs-desc);
+    opacity: 0.55;
+    line-height: 1.4;
+    transition: opacity var(--dur-med) var(--ease-out);
+}
+#page-2 .project-card:hover .project-info p { opacity: 0.80; }
+
+/* ══════════════════════════════════════════════════════
+   FLAGSHIP — выделение карточки AE-Transport
+   Яркая рамка + свечение + тег "Core Technology"
+
+   ОТКАТ: удалить этот блок и убрать .card-flagship-tag
+   из projects.html, вернуть config-projects.css без изменений.
+   ══════════════════════════════════════════════════════ */
+
+/* Яркая рамка + постоянное свечение у первой карточки */
+#page-2 .project-card-1 {
+    border-color: var(--border-gold);
+    box-shadow:
+        0 2px 12px rgba(0,0,0,0.35),
+        0 0 28px rgba(201,168,76,0.12);
+}
+
+/* При hover свечение усиливается */
+#page-2 .project-card-1:hover {
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.50),
+        0 0 40px rgba(201,168,76,0.20);
+}
+
+/* Тег "Core Technology" — между project-info и стрелкой */
+.card-flagship-tag {
+    font-family: var(--font-med);
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.70;
+    border: 1px solid var(--border-gold-dim);
+    border-radius: 999px;
+    padding: 4px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 8px;
+    transition: opacity var(--dur-med) var(--ease-out);
+}
+#page-2 .project-card-1:hover .card-flagship-tag {
+    opacity: 1;
+}

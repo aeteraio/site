@@ -1,0 +1,202 @@
+/*
+ * background.css — Aetera
+ * Три доминирующих цвета: бирюза → фиолет → малиновый
+ * Каждый цвет царит на экране, затем плавно уступает следующему
+ * Яркость пульсирует от насыщенного до глубокого тёмного
+ */
+
+.sky-container {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: #08051a;
+    overflow: hidden;
+}
+
+/* ============================================================
+   СЛОЙ 1 — БИРЮЗА
+   Доминирует в начале цикла, уходит в тень к середине
+   ============================================================ */
+.sky-layer-teal {
+    position: absolute;
+    inset: -40%;
+    background:
+        radial-gradient(ellipse 80% 70% at 40% 40%,
+            #06b6d4 0%, #0891b2 30%, #0e7490 55%, transparent 75%),
+        radial-gradient(ellipse 60% 50% at 70% 65%,
+            #22d3ee 0%, #0284c7 40%, transparent 68%);
+    animation: phaseTeal 18s ease-in-out infinite;
+    will-change: opacity, transform;
+}
+
+/* ============================================================
+   СЛОЙ 2 — ФИОЛЕТ
+   Входит в середине, уходит к концу
+   ============================================================ */
+.sky-layer-violet {
+    position: absolute;
+    inset: -40%;
+    background:
+        radial-gradient(ellipse 80% 70% at 55% 45%,
+            #7c3aed 0%, #6d28d9 30%, #4c1d95 55%, transparent 75%),
+        radial-gradient(ellipse 60% 55% at 30% 70%,
+            #8b5cf6 0%, #5b21b6 40%, transparent 68%);
+    animation: phaseViolet 18s ease-in-out infinite;
+    will-change: opacity, transform;
+}
+
+/* ============================================================
+   СЛОЙ 3 — МАЛИНОВЫЙ
+   Входит к концу, уходит в начало следующего цикла
+   ============================================================ */
+.sky-layer-magenta {
+    position: absolute;
+    inset: -40%;
+    background:
+        radial-gradient(ellipse 80% 70% at 45% 50%,
+            #be185d 0%, #9d174d 30%, #831843 55%, transparent 75%),
+        radial-gradient(ellipse 60% 55% at 65% 30%,
+            #db2777 0%, #be123c 40%, transparent 68%);
+    animation: phaseMagenta 18s ease-in-out infinite;
+    will-change: opacity, transform;
+}
+
+/* ============================================================
+   ОРБЫ — добавляют объём, дрейфуют независимо
+   ============================================================ */
+.cloud-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    will-change: transform;
+}
+
+/* Орб 1 — усиливает бирюзу */
+.cloud-orb:nth-child(1) {
+    width: 65vw; height: 60vw;
+    top: -15%; left: -15%;
+    background: radial-gradient(circle,
+        rgba(6, 182, 212, 0.65) 0%,
+        rgba(14, 116, 144, 0.35) 45%,
+        transparent 70%);
+    animation: orbDrift1 38s ease-in-out infinite alternate;
+}
+
+/* Орб 2 — усиливает малиновый */
+.cloud-orb:nth-child(2) {
+    width: 58vw; height: 55vw;
+    bottom: -18%; right: -15%;
+    background: radial-gradient(circle,
+        rgba(190, 24,  93, 0.65) 0%,
+        rgba(157, 23,  77, 0.35) 45%,
+        transparent 70%);
+    animation: orbDrift2 44s ease-in-out infinite alternate;
+    animation-delay: -20s;
+}
+
+/* Орб 3 — усиливает фиолет */
+.cloud-orb:nth-child(3) {
+    width: 50vw; height: 50vw;
+    top: 20%; right: -8%;
+    background: radial-gradient(circle,
+        rgba(109, 40, 217, 0.65) 0%,
+        rgba( 76, 29, 149, 0.35) 45%,
+        transparent 70%);
+    animation: orbDrift3 32s ease-in-out infinite alternate;
+    animation-delay: -10s;
+}
+
+/* ============================================================
+   KEYFRAMES ФАЗ — бирюза → фиолет → малиновый → тёмно → повтор
+   Каждый слой: появляется, доминирует, уходит
+   Цикл 18s × 3 слоя = 54s полный круг смен
+
+   Бирюза:   0–6s  полная → 6–12s угасает → 12–18s тёмная
+   Фиолет:   0–6s  тёмный → 6–12s полный → 12–18s угасает
+   Малина:   0–6s  угасает → 6–12s тёмная → 12–18s полная
+   ============================================================ */
+
+@keyframes phaseTeal {
+    0%   { opacity: 1.00; transform: translate( 0%,  0%)  scale(1.00); }
+    8%   { opacity: 1.00; transform: translate( 3%,  2%)  scale(1.04); }
+    33%  { opacity: 0.15; transform: translate( 6%,  5%)  scale(1.08); }
+    50%  { opacity: 0.05; transform: translate( 4%,  8%)  scale(0.96); }
+    66%  { opacity: 0.10; transform: translate(-2%,  5%)  scale(1.02); }
+    85%  { opacity: 0.70; transform: translate(-4%,  2%)  scale(1.06); }
+    100% { opacity: 1.00; transform: translate( 0%,  0%)  scale(1.00); }
+}
+
+@keyframes phaseViolet {
+    0%   { opacity: 0.10; transform: translate( 0%,  0%)  scale(1.00); }
+    15%  { opacity: 0.50; transform: translate(-3%,  3%)  scale(1.05); }
+    33%  { opacity: 1.00; transform: translate(-6%,  6%)  scale(1.09); }
+    50%  { opacity: 1.00; transform: translate(-4%,  4%)  scale(1.05); }
+    66%  { opacity: 0.15; transform: translate(-2%,  2%)  scale(0.98); }
+    85%  { opacity: 0.05; transform: translate( 2%, -2%)  scale(0.96); }
+    100% { opacity: 0.10; transform: translate( 0%,  0%)  scale(1.00); }
+}
+
+@keyframes phaseMagenta {
+    0%   { opacity: 0.50; transform: translate( 0%,  0%)  scale(1.00); }
+    15%  { opacity: 0.10; transform: translate( 2%, -3%)  scale(0.97); }
+    33%  { opacity: 0.05; transform: translate( 4%, -5%)  scale(0.95); }
+    50%  { opacity: 0.30; transform: translate( 2%, -3%)  scale(0.98); }
+    66%  { opacity: 1.00; transform: translate( 0%,  0%)  scale(1.00); }
+    85%  { opacity: 1.00; transform: translate(-3%,  3%)  scale(1.07); }
+    100% { opacity: 0.50; transform: translate( 0%,  0%)  scale(1.00); }
+}
+
+/* Тёмная пульсация — между сменами фоновый цвет проявляется */
+@keyframes orbDrift1 {
+    0%   { transform: translate( 0%,  0%)  scale(1.00); }
+    35%  { transform: translate( 5%,  7%)  scale(1.10); }
+    70%  { transform: translate(-4%,  4%)  scale(0.94); }
+    100% { transform: translate( 3%, -6%)  scale(1.06); }
+}
+@keyframes orbDrift2 {
+    0%   { transform: translate( 0%,  0%)  scale(1.00); }
+    30%  { transform: translate(-6%,  5%)  scale(1.08); }
+    65%  { transform: translate( 4%, -4%)  scale(0.93); }
+    100% { transform: translate(-3%,  6%)  scale(1.05); }
+}
+@keyframes orbDrift3 {
+    0%   { transform: translate( 0%,  0%)  scale(1.00); }
+    40%  { transform: translate( 4%, -6%)  scale(1.09); }
+    75%  { transform: translate(-5%,  3%)  scale(0.95); }
+    100% { transform: translate( 2%,  5%)  scale(1.04); }
+}
+
+/* ============================================================
+   ВИНЬЕТКА
+   ============================================================ */
+.bg-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -8;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 130% 130% at 50% 50%,
+        transparent 40%,
+        rgba(5, 3, 18, 0.55) 100%
+    );
+}
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (max-width: 768px) {
+    .cloud-orb { filter: blur(65px); }
+    .cloud-orb:nth-child(1) { width: 120vw; height: 72vw; }
+    .cloud-orb:nth-child(2) { width: 100vw; height: 68vw; }
+    .cloud-orb:nth-child(3) { width:  82vw; height: 62vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sky-layer-teal,
+    .sky-layer-violet,
+    .sky-layer-magenta,
+    .cloud-orb { animation: none; }
+    .sky-layer-teal    { opacity: 0.6; }
+    .sky-layer-violet  { opacity: 0.6; }
+    .sky-layer-magenta { opacity: 0.3; }
+}

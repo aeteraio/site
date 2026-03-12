@@ -1,0 +1,269 @@
+/*
+ * config-home.css — aetera™  |  Gold Dark
+ * Позиционирование и стили главной страницы
+ *
+ * ПРИНЦИП СТРЕЛКИ (кнопка Discover):
+ * --btn-height — высота кнопки, единственный источник истины.
+ * padding-right = 0, .ae-arrow-fwd = квадрат --btn-height × --btn-height.
+ * Центр квадрата совпадает с центром правого скругления (radius = --btn-height / 2).
+ * SVG внутри = calc(--btn-height * --btn-arrow-ratio).
+ * При изменении --btn-height стрелка всегда остаётся в центре круга.
+ */
+
+:root {
+    /* Логотип — центр */
+    --logo-top:             22%;
+    --logo-left:            50%;
+    --logo-size:            76px;
+    --logo-ls:              -2px;
+    --logo-shift:           translate(-50%, -50%);
+    --tm-size-pct:          17;
+    --tm-offset-pct:        -88;
+
+    /* Логотип — мини (другие страницы) */
+    --mini-top:             28px;
+    --mini-left:            28px;
+    --mini-size:            38px;
+    --mini-ls:              -1px;
+    --mini-tm-offset:       2px;
+
+    /* Слоган */
+    --slogan-y:             36%;
+    --slogan-size:          13px;
+    --slogan-ls:            6px;
+
+    /* Разделитель */
+    --divider-y:            45%;
+    --divider-width:        50px;
+    --divider-height:       1px;
+
+    /* Описание */
+    --desc-y:               55%;
+    --desc-size:            16px;
+    --desc-width:           400px;
+
+    /* Кнопка Discover
+     * --btn-height — единственный источник истины для стрелки.
+     * --btn-pad-left — отступ текста слева.
+     * --btn-arrow-ratio — размер SVG-иконки как доля от высоты кнопки. */
+    --btn-y:                65%;
+    --btn-height:           44px;
+    --btn-size:             11px;
+    --btn-ls:               3px;
+    --btn-pad-left:         28px;
+    --btn-radius:           999px;
+    --btn-arrow-ratio:      0.386;   /* иконка ≈ 17px при 44px */
+
+    /* Соцсети */
+    --social-y:             80%;
+    --social-gap:           13px;
+    --social-size:          46px;
+    --social-font:          11px;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --logo-size:        64px;
+        --logo-ls:          -1px;
+        --slogan-y:         37%;
+        --slogan-size:      11px;
+        --slogan-ls:        5px;
+        --divider-y:        44.5%;
+        --desc-y:           54%;
+        --desc-size:        14px;
+        --desc-width:       88%;
+        --btn-y:            64%;
+        --btn-height:       40px;
+        --btn-size:         10px;
+        --btn-pad-left:     22px;
+        --social-y:         80%;
+        --social-size:      42px;
+        --social-font:      10px;
+        --social-gap:       12px;
+        --mini-top:         22px;
+        --mini-left:        22px;
+        --mini-size:        32px;
+    }
+}
+
+/* ══ Логотип ══ */
+.logo {
+    top: var(--logo-top);
+    left: var(--logo-left);
+    transform: var(--logo-shift);
+    font-size: var(--logo-size);
+    letter-spacing: var(--logo-ls);
+    position: fixed;
+    font-weight: 200;
+}
+.logo sup {
+    position: relative !important;
+    top: calc(var(--tm-offset-pct) * 1em / 100) !important;
+    font-size: calc(var(--tm-size-pct) * 1em / 100) !important;
+    opacity: 0.48;
+    font-weight: 300;
+}
+
+.logo.mini {
+    top: var(--mini-top);
+    left: var(--mini-left);
+    font-size: var(--mini-size);
+    letter-spacing: var(--mini-ls);
+    transform: none;
+    position: fixed;
+}
+.logo.mini sup {
+    top: var(--mini-tm-offset);
+    font-size: 0.42em;
+    opacity: 0.42;
+}
+
+/* ══ Слоган ══ */
+#page-1 .slogan-wrapper {
+    top: var(--slogan-y);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#page-1 .slogan-text {
+    font-size: var(--slogan-size);
+    letter-spacing: var(--slogan-ls);
+    text-transform: uppercase;
+    font-family: var(--font-light);
+    font-weight: 300;
+    color: #c9a84c;
+    opacity: 0.55;
+    white-space: nowrap;
+}
+
+/* ══ Разделитель ══ */
+#page-1 .divider {
+    top: var(--divider-y);
+    width: var(--divider-width);
+    height: var(--divider-height);
+    background: linear-gradient(to right,
+        transparent,
+        rgba(201,168,76,0.55),
+        transparent);
+    border-radius: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ══ Описание ══ */
+#page-1 .description {
+    top: var(--desc-y);
+    max-width: var(--desc-width);
+    font-size: var(--desc-size);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    font-family: var(--font-light);
+    font-weight: 300;
+    color: rgba(255,255,255,0.50);
+    line-height: 1.68;
+    letter-spacing: 0.01em;
+}
+
+/* ══ Кнопка Discover ══
+ *
+ * padding-right = 0 — стрелка-квадрат прижата к правому краю.
+ * height фиксирована через --btn-height.
+ * gap = 0 — расстояние между текстом и стрелкой задаётся через margin-right на тексте.
+ */
+#page-1 .discover-btn {
+    top: var(--btn-y);
+    height: var(--btn-height);
+    padding: 0 0 0 var(--btn-pad-left);
+    font-size: var(--btn-size);
+    letter-spacing: var(--btn-ls);
+    border-radius: var(--btn-radius);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-light);
+    font-weight: 300;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: rgba(255,255,255,0.75);
+}
+
+/* Текст кнопки — отступ до стрелки */
+#page-1 .discover-btn > :not(.ae-arrow-fwd) {
+    margin-right: 10px;
+}
+
+#page-1 .discover-btn:hover {
+    color: var(--accent);
+    transform: translateX(-50%) translateY(var(--lift));
+}
+#page-1 .discover-btn:active {
+    transform: translateX(-50%) translateY(0px) scale(0.984);
+}
+
+/*
+ * ── Стрелка кнопки ──
+ * Квадрат --btn-height × --btn-height → центр = центр правого скругления.
+ * SVG = calc(--btn-height * --btn-arrow-ratio).
+ * Меняйте только --btn-height — всё пересчитается автоматически.
+ */
+#page-1 .discover-btn .ae-arrow-fwd {
+    width:  var(--btn-height);
+    height: var(--btn-height);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(201,168,76,0.48);
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+#page-1 .discover-btn .ae-arrow-fwd svg {
+    width:  calc(var(--btn-height) * var(--btn-arrow-ratio));
+    height: calc(var(--btn-height) * var(--btn-arrow-ratio));
+    display: block;
+}
+
+#page-1 .discover-btn:hover .ae-arrow-fwd {
+    color: #c9a84c;
+    transform: translateX(4px);
+}
+#page-1 .discover-btn:active .ae-arrow-fwd {
+    transform: translateX(2px);
+}
+
+/* ══ Соцсети ══ */
+#page-1 .social-icons {
+    top: var(--social-y);
+    gap: var(--social-gap);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+#page-1 .social-icons .icon-btn {
+    width: var(--social-size);
+    height: var(--social-size);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--social-font);
+    font-family: var(--font-light);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.40);
+}
+#page-1 .social-icons .icon-btn:hover {
+    color: var(--accent);
+    transform: translateY(-4px) !important;
+    border-color: var(--border-gold);
+}

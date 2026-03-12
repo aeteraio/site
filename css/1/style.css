@@ -1,0 +1,220 @@
+/* ==========================================================================
+   style.css — глобальные визуальные стили, glass-эффекты, hover, базовые правила
+   Версия: март 2026 — добавлена --hover-lift для унифицированной анимации
+   ========================================================================== */
+
+/* ==========================================================================
+   ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+   ========================================================================== */
+
+:root {
+    --accent:          #00f2fe;
+    --accent-glow:     rgba(0, 242, 254, 0.45);
+    --radius-apple:    16px;
+    --glass-bg:        rgba(255, 255, 255, 0.15);
+    --glass-border:    rgba(255, 255, 255, 0.50);
+    --glass-blur:      blur(20px);
+    --glass-saturate:  saturate(160%);
+    --transition:      all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --hover-lift:      -3px;
+    --font-light:      'Aeonik-Light', 'Helvetica Neue', Arial, sans-serif;
+    --font-med:        'Aeonik-Medium', 'Helvetica Neue', Arial, sans-serif;
+    --font-bold:       'Aeonik-Bold', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ==========================================================================
+   1. ПОДКЛЮЧЕНИЕ ШРИФТОВ
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('../fonts/comfortaa.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aeonik-Light';
+    src: url('../fonts/Aeonik/Aeonik-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aeonik-Medium';
+    src: url('../fonts/Aeonik/Aeonik-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Aeonik-Bold';
+    src: url('../fonts/Aeonik/Aeonik-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==========================================================================
+   2. БАЗОВЫЕ НАСТРОЙКИ И СБРОСЫ
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: transparent;
+    color: #fff;
+    font-family: var(--font-light);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Контейнеры */
+.viewport-wrapper,
+.scroll-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.scroll-content {
+    text-align: center;
+}
+
+/* Абсолютные элементы */
+.scroll-content .element,
+#viewport-wrapper .element {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   3. ЛОГОТИП — только визуал
+   ========================================================================== */
+
+.logo {
+    position: fixed;
+    z-index: 5000;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: 'Comfortaa', sans-serif;
+}
+
+.logo sup {
+    font-family: var(--font-light);
+}
+
+/* ==========================================================================
+   4. GLASS-APPLE
+   ========================================================================== */
+
+.glass-apple {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur) var(--glass-saturate);
+    -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-apple);
+    color: white;
+    transition: var(--transition);
+    text-decoration: none;
+    cursor: pointer;
+    /* Тень всегда даёт отрыв от фона — и на тёмной и на светлой фазе */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.20),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.glass-apple:hover,
+.glass-apple:focus-visible {
+    background: rgba(255, 255, 255, 0.24);
+    border-color: rgba(255, 255, 255, 0.70);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.30),
+                0 0 10px var(--accent-glow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transform: translateY(var(--hover-lift));
+}
+
+.glass-apple:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   5. ПРОЧИЕ ГЛОБАЛЬНЫЕ
+   ========================================================================== */
+
+.viewport-wrapper {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.viewport-wrapper.loaded {
+    opacity: 1;
+}
+
+.copyright {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    opacity: 0.35;
+    z-index: 5000;
+}
+
+/* Защита backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+    .glass-apple {
+        background: rgba(255, 255, 255, 0.12);
+    }
+}
+
+/* Улучшение читаемости */
+body {
+    text-rendering: optimizeLegibility;
+}
+
+/* Центрирование элементов по умолчанию */
+#viewport-wrapper .element {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ==========================================================================
+   Добавления в style.css (добавьте в конец файла)
+   ========================================================================== */
+
+/* Переменные для hex-фона (уже частично есть в :root) */
+:root {
+    --hex-distance-factor: 0.12;   /* влияет на скорость волны */
+}
+
+/* Отключаем старый vignette, если он мешает */
+body::before {
+    display: none;                 /* или закомментируйте полностью */
+}
+
+/* Подсветка активных элементов на фоне */
+.glass-apple {
+    position: relative;
+    z-index: 10;
+}
+
+/* Курсор pointer на весь фон при наведении (опционально) */
+#hex-grid {
+    cursor: pointer;
+}

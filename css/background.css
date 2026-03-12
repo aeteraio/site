@@ -1,0 +1,116 @@
+/*
+ * background.css — aetera™
+ * Gold Dark: #0a0a0f база, тончайшие золотые орбы
+ * GPU-safe: только opacity + translate (без scale, без mix-blend-mode)
+ */
+
+.sky-container {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: #0a0a0f;
+    overflow: hidden;
+}
+
+.sky-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% -5%,
+            rgba(201,168,76,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 90%,
+            rgba(201,168,76,0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 90% 75%,
+            rgba(180,150,60,0.03) 0%, transparent 50%);
+    animation: bgBreath 20s ease-in-out infinite alternate;
+    will-change: opacity;
+}
+
+.sky-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 90% 50% at 50% 110%,
+            rgba(30,22,8,0.50) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 30% at 95% 5%,
+            rgba(201,168,76,0.018) 0%, transparent 50%);
+    animation: bgBreath 30s ease-in-out infinite alternate;
+    animation-delay: -10s;
+    will-change: opacity;
+}
+
+.cloud-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    pointer-events: none;
+}
+.cloud-orb:nth-child(1) {
+    width: 65vw; height: 50vw;
+    top: -12%; left: -8%;
+    background: radial-gradient(circle,
+        rgba(201,168,76,0.085) 0%, rgba(160,130,50,0.035) 50%, transparent 70%);
+    animation: orbDrift1 65s ease-in-out infinite alternate;
+    will-change: transform;
+}
+.cloud-orb:nth-child(2) {
+    width: 55vw; height: 50vw;
+    bottom: -12%; right: -8%;
+    background: radial-gradient(circle,
+        rgba(201,168,76,0.055) 0%, rgba(120,100,40,0.025) 50%, transparent 70%);
+    animation: orbDrift2 80s ease-in-out infinite alternate;
+    animation-delay: -28s;
+    will-change: transform;
+}
+.cloud-orb:nth-child(3) {
+    width: 40vw; height: 38vw;
+    top: 22%; right: 3%;
+    background: radial-gradient(circle,
+        rgba(201,168,76,0.030) 0%, transparent 65%);
+    animation: orbDrift1 95s ease-in-out infinite alternate;
+    animation-delay: -45s;
+    will-change: transform;
+}
+
+@keyframes bgBreath {
+    from { opacity: 0.68; }
+    to   { opacity: 1.00; }
+}
+@keyframes orbDrift1 {
+    0%   { transform: translate(  0px,   0px); }
+    33%  { transform: translate( 16px,  12px); }
+    66%  { transform: translate( -8px,  20px); }
+    100% { transform: translate( 10px, -14px); }
+}
+@keyframes orbDrift2 {
+    0%   { transform: translate(  0px,   0px); }
+    33%  { transform: translate(-14px, -10px); }
+    66%  { transform: translate( 10px, -16px); }
+    100% { transform: translate( -6px,  14px); }
+}
+
+.bg-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -8;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse 120% 120% at 50% 50%,
+        transparent 28%,
+        rgba(4,3,8,0.62) 100%
+    );
+}
+
+@media (max-width: 768px) {
+    .cloud-orb { filter: blur(75px); }
+    .cloud-orb:nth-child(1) { width: 110vw; height: 75vw; }
+    .cloud-orb:nth-child(2) { width:  90vw; height: 70vw; }
+    .cloud-orb:nth-child(3) { width:  70vw; height: 58vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sky-container::before,
+    .sky-container::after,
+    .cloud-orb { animation: none; }
+}

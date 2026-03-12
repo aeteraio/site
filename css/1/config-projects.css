@@ -1,0 +1,126 @@
+/*
+ * config-projects.css
+ * Позиционирование и размеры ТОЛЬКО для страницы проектов (page-2)
+ * Переменные в начале — для быстрой настройки расположения и размеров
+ */
+
+/* ====================== DESKTOP (ПК) ====================== */
+:root {
+    /* Позиции карточек от верха экрана (в %) */
+    --y-proj-1:             18%;     /* первая карточка */
+    --y-proj-2:             42%;     /* вторая карточка */
+    --y-proj-3:             66%;     /* третья карточка */
+
+    /* Размеры карточек */
+    --width-project-card:   540px;   /* ширина карточки */
+    --height-project-card:  118px;   /* высота карточки */
+    --padding-project-card: 28px 40px; /* внутренние отступы карточки */
+
+    /* Кнопка "назад" (стрелка ←) */
+    --x-btn-back:           32px;    /* отступ слева */
+    --y-btn-back:           88%;     /* позиция сверху */
+    --size-btn-back:        56px;    /* диаметр кнопки */
+
+    /* Шрифты и размеры текста внутри карточек */
+    --fs-project-title:     22px;    /* заголовок проекта (AE-Transport и т.д.) */
+    --fs-project-desc:      15px;    /* описание под заголовком */
+    --lh-project-desc:      1.45;    /* межстрочный интервал описания */
+
+    /* Дополнительные отступы и размеры */
+    --padding-scroll-content: 100px 20px 240px; /* общий padding страницы */
+}
+
+/* ====================== МОБИЛЬНАЯ ВЕРСИЯ ====================== */
+@media (max-width: 768px) {
+    :root {
+        --y-proj-1:             14%;
+        --y-proj-2:             38%;
+        --y-proj-3:             62%;
+
+        --width-project-card:   90vw;
+        --height-project-card:  120px;
+        --padding-project-card: 24px 28px;
+
+        --x-btn-back:           20px;
+        --y-btn-back:           92%;
+        --size-btn-back:        52px;
+
+        --fs-project-title:     20px;
+        --fs-project-desc:      14px;
+        --lh-project-desc:      1.5;
+
+        --padding-scroll-content: 80px 16px 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --fs-project-title:     18px;
+        --fs-project-desc:      13px;
+        --padding-project-card: 20px 24px;
+    }
+}
+
+/* ====================== СТИЛИ ====================== */
+
+#page-2 .scroll-content {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding: var(--padding-scroll-content);
+}
+
+#page-2 .btn-back-left {
+    position: fixed;
+    left: var(--x-btn-back);
+    top: var(--y-btn-back);
+    width: var(--size-btn-back);
+    height: var(--size-btn-back);
+    border-radius: 50%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+/* Карточки проектов */
+#page-2 .project-card {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--width-project-card);
+    height: var(--height-project-card);
+    padding: var(--padding-project-card);
+    z-index: 10;
+}
+
+#page-2 .project-card-1 { top: var(--y-proj-1); }
+#page-2 .project-card-2 { top: var(--y-proj-2); }
+#page-2 .project-card-3 { top: var(--y-proj-3); }
+
+#page-2 .project-info h3 {
+    font-family: var(--font-bold);
+    font-size: var(--fs-project-title);
+    margin-bottom: 10px;
+    color: var(--accent);
+}
+
+#page-2 .project-info p {
+    font-size: var(--fs-project-desc);
+    line-height: var(--lh-project-desc);
+    opacity: 0.88;
+}
+
+/* Стрелка → внутри карточки */
+#page-2 .project-card .arrow {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    opacity: 0.6;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Hover-эффекты карточек — теперь только через .glass-apple:hover */

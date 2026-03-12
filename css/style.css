@@ -1,0 +1,351 @@
+/* ==========================================================================
+   style.css — aetera™  |  Gold Dark theme
+   Акцент: #c9a84c  |  Фон: #0a0a0f
+   ========================================================================== */
+
+:root {
+    --accent:          #c9a84c;
+    --accent-glow:     rgba(201, 168, 76, 0.28);
+    --accent-dim:      rgba(201, 168, 76, 0.18);
+    --accent-line:     rgba(201, 168, 76, 0.42);
+
+    --bg-base:         #0a0a0f;
+    --btn-bg:          rgba(10, 9, 14, 0.50);    /* кнопки/поля — normal  */
+    --btn-bg-hover:    rgba(14, 12, 20, 0.65);   /* кнопки/поля — hover   */
+    --btn-bg-fallback: rgba(8,  7,  12, 0.92);   /* без backdrop-filter   */
+    --accent-arrow:    rgba(201, 168, 76, 0.48); /* стрелки в покое       */
+    --accent-glow-sm:  rgba(201, 168, 76, 0.10); /* свечение при hover    */
+
+    --border-gold:     rgba(201, 168, 76, 0.38);
+    --border-gold-dim: rgba(201, 168, 76, 0.18);
+
+    --radius-apple:    999px;
+
+    --font-light:      'Aeonik-Light', 'Helvetica Neue', Arial, sans-serif;
+    --font-med:        'Aeonik-Medium', 'Helvetica Neue', Arial, sans-serif;
+    --font-bold:       'Aeonik-Bold', 'Helvetica Neue', Arial, sans-serif;
+
+    --ease-spring:     cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out:        cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-fast:        0.20s;
+    --dur-med:         0.30s;
+    --dur-slow:        0.50s;
+    --arrow-shift:     5px;
+    --lift:            -4px;
+}
+
+/* ── Шрифты ── */
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('../fonts/comfortaa.woff2') format('woff2');
+    font-weight: normal; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik-Light';
+    src: url('../fonts/Aeonik/Aeonik-Light.woff2') format('woff2');
+    font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik-Medium';
+    src: url('../fonts/Aeonik/Aeonik-Medium.woff2') format('woff2');
+    font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik-Bold';
+    src: url('../fonts/Aeonik/Aeonik-Bold.woff2') format('woff2');
+    font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* ── Сброс ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg-base);
+    color: #fff;
+    font-family: var(--font-light);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ── Контейнеры ── */
+.scroll-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0; padding: 0;
+    text-align: center;
+}
+
+#viewport-wrapper {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
+.page-section {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.page-section::-webkit-scrollbar { display: none; }
+
+.scroll-content .element,
+#viewport-wrapper .element {
+    position: absolute;
+    box-sizing: border-box;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ── Логотип ── */
+.logo {
+    position: fixed;
+    z-index: 5000;
+    color: #ffffff;
+    text-shadow: 0 1px 16px rgba(0,0,0,0.5);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 200;
+}
+.logo sup { font-family: var(--font-light); }
+
+/* ══════════════════════════════════════════════════════
+   AE-BTN / GLASS-APPLE
+   Gold Dark: тёмная подложка + золотая рамка
+   ══════════════════════════════════════════════════════ */
+
+.ae-btn,
+.glass-apple {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    color: rgba(255,255,255,0.75);
+    position: relative;
+    z-index: 10;
+
+    background: var(--btn-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid var(--border-gold-dim);
+    border-radius: var(--radius-apple);
+
+    box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+
+    will-change: transform;
+    transition:
+        background   var(--dur-med) var(--ease-out),
+        border-color var(--dur-med) var(--ease-out),
+        box-shadow   var(--dur-med) var(--ease-out),
+        color        var(--dur-med) var(--ease-out),
+        transform    var(--dur-med) var(--ease-spring);
+}
+
+.ae-btn:hover,
+.glass-apple:hover,
+.glass-apple:focus-visible {
+    background: var(--btn-bg-hover);
+    border-color: var(--border-gold);
+    color: var(--accent);
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.50),
+        0 0 22px var(--accent-glow-sm);
+    transform: translateY(var(--lift));
+}
+
+.ae-btn:active,
+.glass-apple:active {
+    transform: translateY(0) scale(0.984);
+    transition-duration: var(--dur-fast);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.40);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+    .ae-btn,
+    .glass-apple { background: var(--btn-bg-fallback); }
+}
+
+/* ── Стрелка вперёд ── */
+.ae-arrow-fwd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 17px; height: 17px;
+    color: var(--accent-arrow);
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+.ae-arrow-fwd svg { width: 100%; height: 100%; display: block; }
+
+.ae-btn:hover .ae-arrow-fwd,
+.glass-apple:hover .ae-arrow-fwd {
+    color: var(--accent);
+    transform: translateX(var(--arrow-shift));
+}
+.ae-btn:active .ae-arrow-fwd,
+.glass-apple:active .ae-arrow-fwd { transform: translateX(2px); }
+
+.project-card .ae-arrow-fwd     { width: 18px; height: 18px; }
+.project-card .ae-arrow-fwd svg { width: 100%; height: 100%; }
+
+/* ── Fade transition ── */
+#viewport-wrapper {
+    opacity: 0;
+    transition: opacity 0.45s ease;
+}
+#viewport-wrapper.loaded { opacity: 1; }
+
+/* ── Копирайт ── */
+
+/* Фиксированный — только на страницах без скролла (home, projects) */
+.copyright {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    opacity: 0.20;
+    z-index: 5000;
+    color: #fff;
+}
+
+/* Встроенный — внутри скролл-модулей (transport, print, drones, contact) */
+.copyright-inline {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.28;
+    padding: 40px 0 32px;
+    color: #fff;
+    font-family: var(--font-light);
+    letter-spacing: 0.02em;
+    user-select: none;
+}
+
+body::before { display: none; }
+
+/* ══════════════════════════════════════════════════════
+   КНОПКА НАЗАД
+   ══════════════════════════════════════════════════════ */
+
+.btn-back-left {
+    position: fixed;
+    left: 32px;
+    top: 88%;
+    width: 46px; height: 46px;
+    z-index: 3000;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: rgba(255,255,255,0.28);
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+.btn-back-left:hover {
+    color: var(--accent);
+    transform: translateX(-5px);
+}
+.btn-back-left .svg-arrow-back { width: 100%; height: 100%; display: block; }
+.btn-back-left .arrow-circle   { opacity: 0.28; transition: opacity var(--dur-med); }
+.btn-back-left:hover .arrow-circle { opacity: 0.82; }
+
+@media (max-width: 768px) {
+    .btn-back-left { left: 18px; top: 92%; width: 42px; height: 42px; }
+}
+
+.ae-arrow-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: rgba(255,255,255,0.28);
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+.ae-arrow-back svg { width: 100%; height: 100%; display: block; }
+.ae-arrow-back .ae-circle {
+    opacity: 0.22;
+    transition: opacity var(--dur-med) var(--ease-out);
+}
+.ae-arrow-back:hover {
+    color: var(--accent);
+    transform: translateX(calc(-1 * var(--arrow-shift)));
+}
+.ae-arrow-back:hover .ae-circle { opacity: 0.72; }
+.ae-arrow-back:active {
+    transform: translateX(-2px);
+    transition-duration: var(--dur-fast);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GLASS-INPUT — поля ввода в едином стиле с .ae-btn
+   Применяется к <input> и <textarea class="glass-input">.
+   Состояния normal/focus зеркалят ae-btn normal/hover.
+   ══════════════════════════════════════════════════════════════ */
+
+.glass-input {
+    display: block;
+    width: 100%;
+    background: var(--btn-bg);
+    border: 1px solid var(--border-gold-dim);
+    border-radius: 12px;
+    padding: 13px 16px;
+    color: rgba(255,255,255,0.80);
+    font-size: 13px;
+    font-family: var(--font-light);
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow:
+        0 2px 8px  rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    resize: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        border-color var(--dur-med) var(--ease-out),
+        background   var(--dur-med) var(--ease-out),
+        box-shadow   var(--dur-med) var(--ease-out);
+}
+
+.glass-input::placeholder {
+    color: rgba(255,255,255,0.25);
+    font-family: var(--font-light);
+}
+
+/* Фокус = .ae-btn:hover: тот же bg, та же рамка, тот же glow */
+.glass-input:focus {
+    background: var(--btn-bg-hover);
+    border-color: var(--border-gold);
+    box-shadow:
+        0 4px 16px  rgba(0,0,0,0.24),
+        0 0 0 3px   rgba(201,168,76,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+}

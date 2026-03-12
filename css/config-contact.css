@@ -1,0 +1,269 @@
+/*
+ * config-contact.css — aetera™  |  Gold Dark
+ * Страница контактов (page-5)
+ *
+ * Базовый стиль элементов — из style.css:
+ *   .glass-input  →  поля ввода (input, textarea)
+ *   .ae-btn       →  кнопка Submit
+ *
+ * Здесь только специфика страницы: layout, позиционирование,
+ * размеры формы, чекбокс NDA, сообщения success/error.
+ */
+
+/* ══ LAYOUT ══ */
+
+#page-5 {
+    overflow-y: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    flex: 1;          /* растягивается, копирайт уходит вниз */
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 110px 5% 80px;
+    width: 100%;
+}
+@media (max-width: 860px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 100px 5% 80px;
+    }
+}
+
+/* ══ КНОПКА НАЗАД ══ */
+
+#page-5 .btn-back-left {
+    position: fixed;
+    left: 32px; top: 88%;
+    width: 46px; height: 46px;
+    background: transparent; border: none; padding: 0;
+    cursor: pointer; z-index: 3000;
+    color: rgba(255,255,255,0.28);
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+#page-5 .btn-back-left:hover { color: var(--accent); transform: translateX(-5px); }
+#page-5 .btn-back-left .svg-arrow-back { width: 100%; height: 100%; display: block; }
+#page-5 .btn-back-left .arrow-circle { opacity: 0.28; transition: opacity var(--dur-med); }
+#page-5 .btn-back-left:hover .arrow-circle { opacity: 0.80; }
+
+@media (max-width: 768px) {
+    #page-5 .btn-back-left { left: 18px; top: 92%; }
+}
+
+/* ══ LEFT: INFO ══ */
+
+.contact-info { position: sticky; top: 110px; text-align: left; }
+
+.contact-info__tag {
+    display: inline-block;
+    font-family: var(--font-med);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.70;
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border: 1px solid var(--border-gold-dim);
+    border-radius: 999px;
+    background: rgba(201,168,76,0.04);
+}
+
+.contact-info__title {
+    font-family: var(--font-bold);
+    font-size: 44px;
+    color: #fff;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+@media (max-width: 1024px) { .contact-info__title { font-size: 36px; } }
+
+.contact-info__desc {
+    font-family: var(--font-light);
+    font-size: 15px;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.50);
+    margin-bottom: 40px;
+    max-width: 360px;
+}
+
+/* ── Каналы связи (.glass-apple из style.css) ── */
+
+.contact-channels { display: flex; flex-direction: column; gap: 8px; }
+
+.contact-channel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #fff;
+}
+.contact-channel__icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; flex-shrink: 0;
+    color: var(--accent); opacity: 0.60;
+    transition: opacity var(--dur-med) var(--ease-out);
+}
+.contact-channel__icon svg { width: 16px; height: 16px; }
+.contact-channel__text {
+    font-family: var(--font-light);
+    font-size: 13px;
+    color: rgba(255,255,255,0.50);
+    letter-spacing: 0.02em;
+    transition: color var(--dur-med) var(--ease-out);
+}
+.contact-channel:hover .contact-channel__icon { opacity: 1; }
+.contact-channel:hover .contact-channel__text  { color: rgba(255,255,255,0.85); }
+
+/* ══ RIGHT: FORM ══ */
+
+.contact-form-wrap { padding-top: 8px; }
+
+.contact-form { display: flex; flex-direction: column; gap: 10px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+/*
+ * .glass-input базовые стили — из style.css.
+ * Здесь только переопределение border-radius для полей формы
+ * (карточки используют 999px, поля чуть прямоугольнее — 12px).
+ * Остальное наследуется автоматически.
+ */
+.contact-form .glass-input {
+    border-radius: 12px;
+}
+
+/* ── NDA чекбокс ── */
+
+.form-nda { margin: 4px 0 6px; }
+
+.form-checkbox {
+    display: flex; align-items: flex-start;
+    gap: 12px; cursor: pointer;
+}
+.form-checkbox input[type="checkbox"] { display: none; }
+
+.form-checkbox__box {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border-gold-dim);
+    background: var(--btn-bg);
+    flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--dur-med) var(--ease-out);
+}
+.form-checkbox input:checked ~ .form-checkbox__box {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+.form-checkbox input:checked ~ .form-checkbox__box::after {
+    content: '';
+    display: block;
+    width: 4px; height: 8px;
+    border: 1.5px solid #0a0a0f;
+    border-top: none; border-left: none;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+.form-checkbox__label {
+    font-family: var(--font-light);
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.35);
+    transition: color var(--dur-med) var(--ease-out);
+}
+.form-checkbox:hover .form-checkbox__label { color: rgba(255,255,255,0.60); }
+
+/*
+ * ── Кнопка Submit ──
+ * Базовый стиль — от .ae-btn (style.css): фон, рамка, shadow, hover, active.
+ *
+ * Специфика здесь:
+ *   – width: 100% (растянута на всю форму)
+ *   – height: --submit-height (фиксирована для позиционирования стрелки)
+ *   – padding: 0 0 0 24px (стрелка прижата к правому краю)
+ *   – стрелка: квадрат --submit-height × --submit-height → центр в скруглении
+ */
+.btn-submit {
+    --submit-height:       46px;
+    --submit-arrow-ratio:  0.37;    /* SVG ≈ 17px при 46px */
+
+    width: 100%;
+    height: var(--submit-height);
+    padding: 0 0 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    margin-top: 4px;
+
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: var(--font-light);
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+}
+
+.btn-submit:hover { color: rgba(255,255,255,0.90); }
+
+/* Стрелка: квадрат = --submit-height → центр совпадает с центром скругления */
+.btn-submit .arrow--inline {
+    width:  var(--submit-height);
+    height: var(--submit-height);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-arrow);
+    transition:
+        color     var(--dur-med) var(--ease-out),
+        transform var(--dur-med) var(--ease-spring);
+}
+.btn-submit .arrow--inline svg {
+    width:  calc(var(--submit-height) * var(--submit-arrow-ratio));
+    height: calc(var(--submit-height) * var(--submit-arrow-ratio));
+    display: block;
+}
+.btn-submit:hover .arrow--inline {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+.btn-submit:active .arrow--inline { transform: translateX(2px); }
+
+/* ── Success / Error ── */
+
+.form-success,
+.form-error {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-family: var(--font-light);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+.form-success {
+    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.28);
+    color: var(--accent);
+}
+.form-error {
+    background: rgba(255,80,80,0.06);
+    border: 1px solid rgba(255,80,80,0.28);
+    color: rgba(255,120,120,0.90);
+}

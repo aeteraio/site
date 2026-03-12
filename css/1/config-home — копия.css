@@ -1,0 +1,179 @@
+/*
+ * config-home.css
+ * Позиционирование, размеры и отступы ТОЛЬКО для главной страницы (page-1)
+ * Управление логотипом (Main/Mini) и контентом
+ */
+
+/* ====================== DESKTOP (ПК) ====================== */
+:root {
+    /* --- ЛОГОТИП (ГЛАВНЫЙ ЭКРАН) --- */
+    --logo-top:                 20%;           /* Положение: центр по вертикали */
+    --logo-left:                50%;           /* Положение: центр по горизонтали */
+    --logo-size:                100px;         /* Размер шрифта aetera */
+    --logo-ls:                  0px;          /* Отступ между буквами */
+    --logo-shift:               translate(-50%, -50%); /* Выравнивание по центру */
+
+    /* --- ЛОГОТИП (MINI - ДЛЯ ДРУГИХ СТРАНИЦ) --- */
+    --mini-top:                 30px;          /* Положение: отступ сверху */
+    --mini-left:                30px;          /* Положение: отступ слева */
+    --mini-size:                40px;          /* Размер шрифта в углу */
+    --mini-ls:                  0px;          /* Отступ между буквами в углу */
+
+    /* --- TM ЗНАК (пропорционально размеру логотипа в %) --- */
+    --tm-size-pct:              17;            /* размер шрифта tm в % от logo-size / mini-size */
+    --tm-offset-pct:            20;            /* смещение вниз в % от logo-size / mini-size */
+
+    /* --- СЛОГАН (AE-ternal mobility) --- */
+    --slogan-y:                 34%;           /* Положение по вертикали */
+    --slogan-size:              20px;          /* Размер шрифта */
+    --slogan-ls:                5px;           /* Отступ между буквами (разрядка) */
+
+    /* --- РАЗДЕЛИТЕЛЬ (ПОЛОСКА) --- */
+    --divider-y:                45%;           /* Положение по вертикали (центр) */
+    --divider-width:            60px;          /* Длина полоски */
+    --divider-height:           1px;           /* Толщина полоски */
+    --divider-color:            var(--accent); /* Цвет: акцентный */
+
+    /* --- ОПИСАНИЕ --- */
+    --desc-y:                   50%;
+    --desc-size:                18px;
+    --desc-width:               420px;
+
+    /* --- КНОПКА DISCOVER --- */
+    --btn-y:                    64%;
+    --btn-size:                 17px;
+    --btn-padding:              16px 36px;     /* чуть шире, чтобы лучше смотрелось овально */
+    --btn-radius:               48px;          /* овальная форма (больше, чем --radius-apple) */
+
+    /* --- СОЦСЕТИ --- */
+    --social-y:                 80%;
+    --social-gap:               18px;
+    --social-size:              40px;          /* размер кнопок соцсетей */
+}
+
+/* TM знак с calc (применяется ко ВСЕМ версиям: main/mini, ПК/мобильный) */
+.logo sup {
+    position: relative !important;
+    top: calc(var(--tm-offset-pct) * 1em / 100) !important;
+    font-size: calc(var(--tm-size-pct) * 1em / 100) !important;
+}
+
+/* ====================== МОБИЛЬНАЯ ВЕРСИЯ ====================== */
+@media (max-width: 768px) {
+    :root {
+        --logo-top:             18%;
+        --logo-size:            78px;
+        --slogan-y:             32%;
+        --slogan-size:          18px;
+        --divider-y:            46%;
+        --desc-y:               54%;
+        --desc-size:            16px;
+        --desc-width:           90%;
+        --btn-y:                65%;
+        --btn-size:             15px;
+        --btn-padding:          14px 32px;
+        --btn-radius:           42px;          /* овальная и на мобильных */
+        --social-y:             80%;
+        --social-size:          48px;
+        --social-gap:           20px;
+
+        /* TM пропорции на мобильных (можно менять независимо) */
+        --tm-size-pct:          17;
+        --tm-offset-pct:        20;
+    }
+}
+
+/* ====================== СТИЛИ ====================== */
+
+/* Логотип */
+.logo {
+    top: var(--logo-top) !important;
+    left: var(--logo-left) !important;
+    transform: var(--logo-shift) !important;
+    font-size: var(--logo-size) !important;
+    letter-spacing: var(--logo-ls) !important;
+    position: fixed;
+}
+
+/* Логотип Мини */
+.logo.mini {
+    top: var(--mini-top) !important;
+    left: var(--mini-left) !important;
+    font-size: var(--mini-size) !important;
+    letter-spacing: var(--mini-ls) !important;
+    transform: none !important;
+    position: fixed;
+}
+
+/* Элементы страницы */
+#page-1 .slogan-wrapper { 
+    top: var(--slogan-y) !important; 
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+#page-1 .slogan-text { 
+    font-size: var(--slogan-size) !important; 
+    letter-spacing: var(--slogan-ls) !important; 
+}
+
+#page-1 .divider {
+    top: var(--divider-y) !important;
+    width: var(--divider-width) !important;
+    height: var(--divider-height) !important;
+    background: var(--divider-color) !important;
+    border-radius: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#page-1 .description { 
+    top: var(--desc-y) !important; 
+    max-width: var(--desc-width) !important; 
+    font-size: var(--desc-size) !important; 
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    text-align: center; 
+    width: 90%; 
+}
+
+#page-1 .discover-btn {
+    top: var(--btn-y) !important;
+    padding: var(--btn-padding) !important;
+    font-size: var(--btn-size) !important;
+    border-radius: var(--btn-radius) !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Усиленный hover именно для главной кнопки */
+#page-1 .discover-btn:hover,
+#page-1 .discover-btn:focus-visible {
+    transform: translateX(-50%) translateY(-6px) !important;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 32px var(--accent-glow) !important;
+}
+
+/* Соцсети — круглые + тонкий шрифт */
+#page-1 .social-icons { 
+    top: var(--social-y) !important; 
+    gap: var(--social-gap) !important; 
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex; 
+}
+
+#page-1 .social-icons .icon-btn {
+    width: var(--social-size) !important;
+    height: var(--social-size) !important;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--social-size) * 0.42);
+    font-family: var(--font-light);           /* ← вернули тонкий шрифт */
+    font-weight: 300;
+}

@@ -1,0 +1,184 @@
+/*
+ * menu.css — aetera™
+ * Бургер + полноэкранное меню
+ */
+
+/* ══ БУРГЕР-КНОПКА ══ */
+
+.menu-toggle {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    z-index: 7001;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.burger-icon {
+    position: relative;
+    width: 22px;
+    height: 16px;
+}
+
+.bar {
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 1px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-1 { top: 3px; }
+.bar-2 { bottom: 3px; width: 14px; }
+
+/* Крестик */
+.active-toggle .bar-1 {
+    top: 7px;
+    transform: rotate(45deg);
+    width: 22px;
+}
+.active-toggle .bar-2 {
+    bottom: 7px;
+    transform: rotate(-45deg);
+    width: 22px;
+}
+
+/* ══ ПОЛНОЭКРАННОЕ МЕНЮ ══ */
+
+.full-menu {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 2, 14, 0.92);
+    backdrop-filter: blur(40px) saturate(140%);
+    -webkit-backdrop-filter: blur(40px) saturate(140%);
+    z-index: 6000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s var(--ease-out), visibility 0.45s step-end;
+}
+
+.full-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.45s var(--ease-out), visibility 0.45s step-start;
+}
+
+/* ══ ССЫЛКИ ══ */
+
+.menu-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 32px;
+}
+
+.menu-links li { overflow: hidden; }
+
+.menu-links a {
+    display: block;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    font-size: 26px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: var(--font-med);
+    padding: 8px 16px;
+    transition:
+        color          0.3s var(--ease-out),
+        letter-spacing 0.3s var(--ease-out);
+}
+
+.menu-links a:hover {
+    color: var(--accent);
+    letter-spacing: 6px;
+}
+
+/* Разделитель */
+.menu-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+    margin-bottom: 32px;
+}
+
+/* ══ СОЦСЕТИ ══ */
+
+.menu-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.40);
+    text-decoration: none;
+
+    /* Glass circle */
+    background: linear-gradient(135deg,
+        rgba(255,255,255,0.08) 0%,
+        rgba(255,255,255,0.03) 100%);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+
+    transition:
+        color        0.3s var(--ease-out),
+        background   0.3s var(--ease-out),
+        border-color 0.3s var(--ease-out),
+        box-shadow   0.3s var(--ease-out),
+        transform    0.3s var(--ease-spring);
+}
+
+.menu-social-link svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.menu-social-link:hover {
+    color: var(--accent);
+    background: linear-gradient(135deg,
+        rgba(201, 168, 76, 0.12) 0%,
+        rgba(201, 168, 76, 0.04) 100%);
+    border-color: var(--border-gold);
+    box-shadow:
+        0 4px 16px rgba(0,0,0,0.24),
+        0 0 16px var(--accent-glow-sm),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+.menu-social-link:active {
+    transform: translateY(0) scale(0.93);
+    transition-duration: var(--dur-fast);
+}
+
+/* ══ ЛОГОТИП скрывается при открытом меню ══ */
+body:has(.full-menu.active) .logo {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
