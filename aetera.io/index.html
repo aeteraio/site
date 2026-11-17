@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aetera — Infrastructure for the next era.</title>
+  <meta name="description" content="A new transport system. 300 km/h point-to-point, no roads or rails. $120K/km to build — 250× less than metro. PCT patent filed. Pre-seed round open.">
+  <meta name="keywords" content="aetera, transport infrastructure, point-to-point transport, autonomous transport, deep tech, pre-seed investment, PCT patent, mobility startup">
+  <meta name="author" content="aetera">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aetera.io/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://aetera.io/">
+  <meta property="og:title"       content="aetera — Infrastructure for the next era.">
+  <meta property="og:description" content="A new physical layer for moving people and goods. 300 km/h. $120K/km. No roads, rails or terminals. PCT filed. Pre-seed active.">
+  <meta property="og:image"       content="https://aetera.io/img/og-light.png">
+  <meta property="og:site_name"   content="aetera">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:site"        content="@aetera_official">
+  <meta name="twitter:title"       content="aetera — Infrastructure for the next era.">
+  <meta name="twitter:description" content="A new physical layer for moving people and goods. 300 km/h. $120K/km. No roads, rails or terminals. PCT filed. Pre-seed active.">
+  <meta name="twitter:image"       content="https://aetera.io/img/og-light.png">
+
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  
+  <!-- Preloads for performance -->
+  <link rel="preload" href="./styles.css?v=1.0.5" as="style">
+  <link rel="preload" href="./fonts/D-DIN.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/D-DIN-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <link rel="stylesheet" href="./styles.css?v=1.0.5">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "aetera",
+    "url": "https://aetera.io/",
+    "logo": "https://aetera.io/img/og-light.png",
+    "description": "A new transport system. 300 km/h point-to-point, no roads or rails. PCT patent filed.",
+    "foundingDate": "2024",
+    "sameAs": [
+      "https://twitter.com/aetera_official"
+    ]
+  }
+  </script>
+
+  <!-- Apply language before first paint to prevent flashes -->
+  <script>
+    (function(){
+      try {
+        var savedLang = localStorage.getItem('aetera-lang');
+        if (savedLang) {
+          document.documentElement.lang = savedLang;
+        }
+      } catch(e){}
+    })();
+  </script>
+</head>
+<body>
+  <div class="noise" id="noise"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-name">aetera</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#thesis" class="mono-xs" data-i18n="nav.thesis">01 · thesis</a>
+        <a href="#specs" class="mono-xs" data-i18n="nav.specs">02 · specs</a>
+        <a href="#economics" class="mono-xs" data-i18n="nav.economics">03 · economics</a>
+        <a href="#market" class="mono-xs" data-i18n="nav.market">04 · market</a>
+        <a href="#roadmap" class="mono-xs" data-i18n="nav.roadmap">05 · roadmap</a>
+      </nav>
+
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+      </div>
+
+      <a href="#contact" class="nav-cta">
+        <span data-i18n="nav.cta">Contact</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span class="line"></span>
+        <span class="line"></span>
+      </button>
+    </div>
+    <div class="nav-progress"><div class="nav-progress-bar" id="progress"></div></div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav-links">
+        <a href="#thesis" class="mobile-nav-link" data-i18n="nav.thesis">01 · thesis</a>
+        <a href="#specs" class="mobile-nav-link" data-i18n="nav.specs">02 · specs</a>
+        <a href="#economics" class="mobile-nav-link" data-i18n="nav.economics">03 · economics</a>
+        <a href="#market" class="mobile-nav-link" data-i18n="nav.market">04 · market</a>
+        <a href="#roadmap" class="mobile-nav-link" data-i18n="nav.roadmap">05 · roadmap</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <a href="#contact" class="mobile-nav-cta">
+          <span data-i18n="nav.cta">Contact</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" data-screen-label="01 Hero">
+
+    <div class="hero-content">
+      <div class="hero-eyebrow mono-xs" data-i18n="hero.eyebrow">
+        <span class="eyebrow-dot"></span>
+        TRANSPORT INFRASTRUCTURE · PRE-SEED · ACTIVE
+      </div>
+
+      <h1 class="hero-title">
+        <span class="title-line" data-i18n="hero.title1">Infrastructure</span>
+        <span class="title-line" data-i18n="hero.title2">for the <span class="copper-text">next era.</span></span>
+      </h1>
+
+      <p class="hero-tagline">
+        <span data-i18n="hero.tag1">On-demand</span>
+        <span class="tag-sep">·</span>
+        <span data-i18n="hero.tag2">Point-to-point</span>
+        <span class="tag-sep">·</span>
+        <span data-i18n="hero.tag3">Up to 400 km/h</span>
+        <span class="tag-sep">·</span>
+        <span data-i18n="hero.tag4">Fully electric</span>
+      </p>
+
+      <p class="hero-lede" data-i18n="hero.lede">
+        A new physical layer for moving people and goods — operating at <strong>300 km/h</strong>
+        (<span>400 km/h</span> max) without roads, rails or fleets. <strong>$120K / km</strong> to build.
+        <strong>250+ year</strong> lifespan. <span>PCT</span> patent filed. Unit economics attached.
+      </p>
+
+      <div class="hero-meter">
+        <div class="meter-col">
+          <div class="meter-label mono-xs" data-i18n="hero.meter.vel">VELOCITY</div>
+          <div class="meter-value" translate="no"><span id="m-speed">0</span><span class="meter-unit">km/h</span></div>
+          <div class="meter-sub" data-i18n="hero.meter.vel.sub">cruise · 400 max</div>
+        </div>
+        <div class="meter-col">
+          <div class="meter-label mono-xs" data-i18n="hero.meter.cost">BUILD COST / KM</div>
+          <div class="meter-value" translate="no">$<span id="m-cost">0</span><span class="meter-unit">K</span></div>
+          <div class="meter-sub" data-i18n="hero.meter.cost.sub">vs $30M metro · 250× Δ</div>
+        </div>
+        <div class="meter-col">
+          <div class="meter-label mono-xs" data-i18n="hero.meter.life">LIFESPAN</div>
+          <div class="meter-value" translate="no"><span id="m-life">0</span><span class="meter-unit">+ yrs</span></div>
+          <div class="meter-sub" data-i18n="hero.meter.life.sub">robotic renewal · effectively ∞</div>
+        </div>
+        <div class="meter-col">
+          <div class="meter-label mono-xs" data-i18n="hero.meter.tam">ADDRESSABLE TAM</div>
+          <div class="meter-value" translate="no">$<span id="m-tam">0</span><span class="meter-unit">T</span></div>
+          <div class="meter-sub" data-i18n="hero.meter.tam.sub">top 400 corridors · 2040</div>
+        </div>
+      </div>
+      <div class="hero-meter-footnote mono-xs" data-i18n="hero.meter.footnote" style="margin-top:0.75rem; opacity:0.4; text-align:right; width:100%;"></div>
+
+      <div class="hero-cta-row">
+        <a href="#contact" class="btn-primary">
+          <span data-i18n="hero.cta1">Request access</span><span class="arrow">→</span>
+        </a>
+        <a href="#thesis" class="btn-ghost">
+          <span data-i18n="hero.cta2">Read thesis</span>
+        </a>
+        <span class="cta-note mono-xs" data-i18n="hero.ctaNote">NDA required · typical response &lt; 48h</span>
+      </div>
+    </div>
+
+    <div class="hero-bottomline">
+      <span class="mono-xs" translate="no">01 / 09</span>
+      <span class="mono-xs scroll-hint">SCROLL ▾</span>
+    </div>
+  </section>
+
+  <!-- Main content comes from partials -->
+  <main id="main-content"></main>
+
+
+
+  <script src="./i18n.js?v=1.0.5" defer></script>
+  <script src="./app.js?v=1.0.5" defer></script>
+</body>
+</html>
